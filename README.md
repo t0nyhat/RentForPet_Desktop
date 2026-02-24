@@ -334,3 +334,6 @@ MIT License — см. [LICENSE](LICENSE)
 **RentForPet** 🐾
 
 </div>
+---
+
+<!-- Updated: 2026-02-24 -->
