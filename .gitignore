@@ -1,0 +1,66 @@
+# Build artifacts
+bin/
+obj/
+**/bin/
+**/obj/
+node_modules/
+**/node_modules/
+dist/
+**/dist/
+dist-electron/
+PetHotel.API/publish/
+PetHotel.API/out/
+
+# Docker local data
+docker-data/
+
+# SQLite database
+data/
+*.db
+*.db-shm
+*.db-wal
+
+# Allow EF Core context sources (case-sensitive ignore can still match on macOS)
+!PetHotel.Infrastructure/Data/
+!PetHotel.Infrastructure/Data/**
+
+# IDE settings
+.vs/
+.vscode/
+.idea/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.DotSettings.user
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Tooling
+*.swp
+*.tmp
+
+# Test results
+TestResults/
+**/TestResults/
+*.trx
+
+# Coverage artifacts
+coverage-report/
+**/coverage.cobertura.xml
+**/coverage.opencover.xml
+**/lcov.info
+*.coverage
+*.coveragexml
+frontend/coverage/
+**/coverage/
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+frontend/.env.local
+frontend/.env.development.local
+frontend/.env.production.local

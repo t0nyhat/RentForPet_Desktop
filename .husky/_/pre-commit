@@ -1,0 +1,34 @@
+#!/usr/bin/env sh
+set -e
+
+# ============================================
+# Frontend checks
+# ============================================
+echo "Running frontend checks..."
+cd frontend
+
+# Run lint-staged to check only staged files
+npx lint-staged
+
+# Run TypeScript type checking
+npm run type-check
+
+# Run frontend tests
+echo "Running frontend tests..."
+npm run test:run
+
+# ============================================
+# Backend checks
+# ============================================
+echo ""
+echo "Running backend checks..."
+cd ..
+
+# Run StyleCop (C# linter)
+echo "Running StyleCop (C# linter)..."
+dotnet build --no-restore --verbosity quiet --nologo 2>&1 | grep -i "SA[0-9]\|stylecop" || true
+
+# Run backend tests
+echo "Running backend tests..."
+dotnet test --verbosity quiet --nologo
+

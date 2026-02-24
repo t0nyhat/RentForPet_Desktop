@@ -1,0 +1,144 @@
+name: Auto Version Bump
+
+on:
+  pull_request:
+    types: [closed]
+    branches:
+      - main
+
+permissions:
+  contents: write
+  pull-requests: read
+
+concurrency:
+  group: auto-version-main
+  cancel-in-progress: false
+
+jobs:
+  bump-version:
+    # Only run for merged PRs.
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Get current version
+        id: current_version
+        run: |
+          CURRENT_VERSION=$(node -p "require('./package.json').version")
+          echo "version=${CURRENT_VERSION}" >> "$GITHUB_OUTPUT"
+          echo "Current version: ${CURRENT_VERSION}"
+
+      - name: Determine bump strategy
+        id: bump
+        run: |
+          PR_TITLE="${{ github.event.pull_request.title }}"
+          PR_LABELS="${{ join(github.event.pull_request.labels.*.name, ',') }}"
+          CURRENT_VERSION="${{ steps.current_version.outputs.version }}"
+
+          echo "PR Title: ${PR_TITLE}"
+          echo "PR Labels: ${PR_LABELS}"
+
+          # Base SemVer bump (stable default = patch).
+          BASE_BUMP="patch"
+
+          # Label-based mapping has priority.
+          if [[ "$PR_LABELS" == *"major"* ]] || [[ "$PR_LABELS" == *"breaking"* ]]; then
+            BASE_BUMP="major"
+          elif [[ "$PR_LABELS" == *"minor"* ]] || [[ "$PR_LABELS" == *"feature"* ]]; then
+            BASE_BUMP="minor"
+          elif [[ "$PR_LABELS" == *"patch"* ]] || [[ "$PR_LABELS" == *"bugfix"* ]] || [[ "$PR_LABELS" == *"fix"* ]]; then
+            BASE_BUMP="patch"
+          # Conventional-commits fallback from PR title.
+          elif [[ "$PR_TITLE" =~ ^feat(\(.*\))?!: ]] || [[ "$PR_TITLE" =~ BREAKING[[:space:]]CHANGE ]]; then
+            BASE_BUMP="major"
+          elif [[ "$PR_TITLE" =~ ^feat(\(.*\))?: ]]; then
+            BASE_BUMP="minor"
+          elif [[ "$PR_TITLE" =~ ^fix(\(.*\))?: ]]; then
+            BASE_BUMP="patch"
+          fi
+
+          # If current version is prerelease (e.g. beta), use pre* bumps.
+          if [[ "$CURRENT_VERSION" == *"-"* ]]; then
+            case "$BASE_BUMP" in
+              major) NPM_BUMP="premajor" ;;
+              minor) NPM_BUMP="preminor" ;;
+              patch) NPM_BUMP="prepatch" ;;
+              *) NPM_BUMP="prerelease" ;;
+            esac
+          else
+            NPM_BUMP="$BASE_BUMP"
+          fi
+
+          echo "base_bump=${BASE_BUMP}" >> "$GITHUB_OUTPUT"
+          echo "npm_bump=${NPM_BUMP}" >> "$GITHUB_OUTPUT"
+          echo "Resolved bump strategy: base=${BASE_BUMP}, npm=${NPM_BUMP}"
+
+      - name: Bump version
+        id: new_version
+        run: |
+          NPM_BUMP="${{ steps.bump.outputs.npm_bump }}"
+
+          if [[ "$NPM_BUMP" == pre* ]] || [[ "$NPM_BUMP" == "prerelease" ]]; then
+            npm version "$NPM_BUMP" --preid=beta --no-git-tag-version
+          else
+            npm version "$NPM_BUMP" --no-git-tag-version
+          fi
+
+          NEW_VERSION=$(node -p "require('./package.json').version")
+          echo "version=${NEW_VERSION}" >> "$GITHUB_OUTPUT"
+          echo "New version: ${NEW_VERSION}"
+
+      - name: Commit and push version bump
+        run: |
+          TAG_NAME="v${{ steps.new_version.outputs.version }}"
+
+          git add package.json package-lock.json
+
+          if git diff --cached --quiet; then
+            echo "No version changes detected. Skipping commit/tag."
+            exit 0
+          fi
+
+          git commit -m "chore(release): bump version to ${{ steps.new_version.outputs.version }} [skip ci]"
+          git tag -a "${TAG_NAME}" -m "Release ${TAG_NAME}"
+
+          # Push commit first, then tag. Release workflow is triggered by tag push.
+          git push origin HEAD:main
+          git push origin "${TAG_NAME}"
+
+      - name: Summary
+        run: |
+          VERSION="${{ steps.new_version.outputs.version }}"
+          RELEASE_KIND="stable"
+          if [[ "$VERSION" == *"-"* ]]; then
+            RELEASE_KIND="prerelease"
+          fi
+
+          {
+            echo "## Version Bump Summary"
+            echo ""
+            echo "- Previous version: \`${{ steps.current_version.outputs.version }}\`"
+            echo "- New version: \`${VERSION}\`"
+            echo "- Base bump: \`${{ steps.bump.outputs.base_bump }}\`"
+            echo "- NPM bump strategy: \`${{ steps.bump.outputs.npm_bump }}\`"
+            echo "- Release kind: \`${RELEASE_KIND}\`"
+            echo "- Tag created: \`v${VERSION}\`"
+          } >> "$GITHUB_STEP_SUMMARY"

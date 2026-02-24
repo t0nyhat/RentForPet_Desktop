@@ -1,0 +1,89 @@
+{
+  "buttons": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "create": "Create",
+    "add": "Add",
+    "close": "Close",
+    "confirm": "Confirm",
+    "back": "Back",
+    "next": "Next",
+    "search": "Search",
+    "filter": "Filter",
+    "clear": "Clear",
+    "apply": "Apply",
+    "refresh": "Refresh",
+    "loading": "Loading...",
+    "submit": "Submit",
+    "reset": "Reset",
+    "yes": "Yes",
+    "no": "No"
+  },
+  "messages": {
+    "success": "Success",
+    "error": "Error",
+    "warning": "Warning",
+    "info": "Information",
+    "loading": "Loading...",
+    "noData": "No data",
+    "confirmDelete": "Are you sure you want to delete?",
+    "unsavedChanges": "You have unsaved changes",
+    "actionCannotBeUndone": "This action cannot be undone",
+    "irreversibleAction": "All refund and transfer actions are irreversible. Please verify your selections.",
+    "operationSuccess": "Operation completed successfully",
+    "operationFailed": "Operation failed",
+    "networkError": "Network error",
+    "serverError": "Server error",
+    "required": "Required field",
+    "invalidFormat": "Invalid format",
+    "requestError": "Request error: {{status}}"
+  },
+  "validation": {
+    "required": "This field is required",
+    "minLength": "Minimum {{count}} characters",
+    "maxLength": "Maximum {{count}} characters",
+    "email": "Enter a valid email",
+    "phone": "Enter a valid phone number",
+    "positiveNumber": "Number must be positive",
+    "invalidDate": "Invalid date"
+  },
+  "time": {
+    "today": "Today",
+    "yesterday": "Yesterday",
+    "tomorrow": "Tomorrow",
+    "days": "days",
+    "hours": "hours",
+    "minutes": "minutes"
+  },
+  "calendar": {
+    "months": [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December"
+    ],
+    "weekDays": ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+    "placeholder": "mm/dd/yyyy",
+    "prevMonth": "Previous month",
+    "nextMonth": "Next month",
+    "close": "Close"
+  },
+  "currency": {
+    "symbol": "$"
+  },
+  "language": {
+    "ru": "Русский",
+    "en": "English",
+    "switchLanguage": "Change language"
+  }
+}

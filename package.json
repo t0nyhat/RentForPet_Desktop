@@ -1,0 +1,120 @@
+{
+  "name": "pet-hotel-desktop",
+  "version": "1.0.4",
+  "description": "Desktop application for pet hotel management - booking, clients, payments and more",
+  "main": "main.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/t0nyhat/PetForRentDesktop.git"
+  },
+  "homepage": "https://github.com/t0nyhat/PetForRentDesktop#readme",
+  "bugs": {
+    "url": "https://github.com/t0nyhat/PetForRentDesktop/issues"
+  },
+  "scripts": {
+    "start": "electron .",
+    "dev": "concurrently \"npm run dev:react\" \"npm run dev:dotnet\"",
+    "dev:react": "npm run docs:sync && cd frontend && npm run dev",
+    "dev:dotnet": "dotnet run --project PetHotel.API",
+    "build": "npm run build:react && npm run build:electron",
+    "docs:sync": "node scripts/sync-help-docs.js",
+    "build:react": "npm run docs:sync && cd frontend && npm run build",
+    "build:react:electron": "npm run docs:sync && cd frontend && cross-env VITE_API_URL=http://localhost:5226 npm run build",
+    "build:electron": "electron-builder",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder",
+    "build:dotnet:mac-silicon": "dotnet publish PetHotel.API/PetHotel.API.csproj -c Release -r osx-arm64 --self-contained -o PetHotel.API/out",
+    "build:dotnet:mac-intel": "dotnet publish PetHotel.API/PetHotel.API.csproj -c Release -r osx-x64 --self-contained -o PetHotel.API/out",
+    "build:dotnet:win": "dotnet publish PetHotel.API/PetHotel.API.csproj -c Release -r win-x64 --self-contained -o PetHotel.API/out",
+    "build:dotnet:linux": "dotnet publish PetHotel.API/PetHotel.API.csproj -c Release -r linux-x64 --self-contained -o PetHotel.API/out",
+    "build:mac-silicon": "npm run build:react:electron && npm run build:dotnet:mac-silicon && node -e \"const fs=require('fs'); const p='PetHotel.API/out'; if(!fs.existsSync(p)||!fs.readdirSync(p).length) throw new Error('PetHotel.API/out пуста или не найдена. Сначала: npm run build:dotnet:mac-silicon');\" && electron-builder --mac --arm64",
+    "build:mac-intel": "npm run build:react:electron && npm run build:dotnet:mac-intel && node -e \"const fs=require('fs'); const p='PetHotel.API/out'; if(!fs.existsSync(p)||!fs.readdirSync(p).length) throw new Error('PetHotel.API/out пуста или не найдена. Сначала: npm run build:dotnet:mac-intel');\" && electron-builder --mac --x64",
+    "build:mac": "npm run build:mac-silicon",
+    "build:win": "npm run build:react:electron && npm run build:dotnet:win && electron-builder --win --x64",
+    "build:linux": "npm run build:react:electron && npm run build:dotnet:linux && electron-builder --linux --x64",
+    "icons:generate": "bash ./scripts/generate-app-icons.sh assets/icon-source.png",
+    "version:beta": "npm version prerelease --preid=beta --no-git-tag-version",
+    "release:beta:mac-silicon": "npm run build:react:electron && npm run build:dotnet:mac-silicon && electron-builder --mac --arm64 --publish always",
+    "release:beta:mac-intel": "npm run build:react:electron && npm run build:dotnet:mac-intel && electron-builder --mac --x64 --publish always",
+    "release:beta:win": "npm run build:react:electron && npm run build:dotnet:win && electron-builder --win --x64 --publish always"
+  },
+  "keywords": [
+    "pet",
+    "hotel",
+    "desktop",
+    "electron"
+  ],
+  "author": {
+    "name": "PetForRent Team",
+    "email": "support@rentforpet.ru"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "electron-updater": "^6.3.9"
+  },
+  "devDependencies": {
+    "concurrently": "^9.0.0",
+    "cross-env": "^10.1.0",
+    "electron": "^39.0.0",
+    "electron-builder": "^26.7.0",
+    "sharp": "^0.34.5"
+  },
+  "overrides": {
+    "minimatch": "^10.2.1"
+  },
+  "build": {
+    "appId": "com.rentforpet.desktop",
+    "productName": "RentForPet",
+    "icon": "build/icons/icon.png",
+    "directories": {
+      "output": "dist-electron"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "frontend/dist/**/*"
+    ],
+    "extraResources": [
+      {
+        "from": "PetHotel.API/out/",
+        "to": "dotnet/",
+        "filter": [
+          "**/*"
+        ]
+      }
+    ],
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "t0nyhat",
+        "repo": "PetForRentDesktop",
+        "releaseType": "release"
+      }
+    ],
+    "mac": {
+      "icon": "build/icons/icon.icns",
+      "category": "public.app-category.business",
+      "target": [
+        "dmg",
+        "zip"
+      ],
+      "artifactName": "${productName}-${version}-${arch}.${ext}"
+    },
+    "win": {
+      "icon": "build/icons/icon.ico",
+      "target": [
+        "nsis",
+        "zip"
+      ],
+      "artifactName": "${productName}-${version}-${arch}.${ext}"
+    },
+    "linux": {
+      "icon": "build/icons",
+      "target": [
+        "AppImage",
+        "deb"
+      ],
+      "artifactName": "${productName}-${version}-${arch}.${ext}"
+    }
+  }
+}

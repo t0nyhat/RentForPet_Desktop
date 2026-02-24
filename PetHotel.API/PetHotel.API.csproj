@@ -1,0 +1,56 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AspNetCoreRateLimit" Version="5.0.0" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.11" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.11">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.11">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.11" />
+    <PackageReference Include="prometheus-net.AspNetCore" Version="8.2.1" />
+    <PackageReference Include="Sentry.AspNetCore" Version="4.0.0" />
+    <PackageReference Include="Serilog.AspNetCore" Version="8.0.3" />
+    <PackageReference Include="Serilog.Sinks.Console" Version="6.0.0" />
+    <PackageReference Include="Serilog.Sinks.File" Version="6.0.0" />
+    <PackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.556">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.9.0" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PetHotel.Application\PetHotel.Application.csproj" />
+    <ProjectReference Include="..\PetHotel.Infrastructure\PetHotel.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <!-- Exclude removed controllers from compilation -->
+  <ItemGroup>
+    <Compile Remove="Extensions\SeedDataExtensions.cs" />
+    <Compile Remove="Controllers\BlogController.cs" />
+    <Compile Remove="Controllers\AdminBlogController.cs" />
+    <Compile Remove="Controllers\ChatController.cs" />
+    <Compile Remove="Controllers\AssistantController.cs" />
+    <Compile Remove="Controllers\PetDiaryController.cs" />
+    <Compile Remove="Controllers\AdminPetDiaryController.cs" />
+    <Compile Remove="Controllers\ShopController.cs" />
+    <Compile Remove="Controllers\AdminShopController.cs" />
+    <Compile Remove="Controllers\SubscriptionPlansController.cs" />
+    <Compile Remove="Controllers\SuperAdminController.cs" />
+    <Compile Remove="Controllers\TenantsController.cs" />
+  </ItemGroup>
+
+</Project>

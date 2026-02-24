@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PetHotel.Domain", "PetHotel.Domain\PetHotel.Domain.csproj", "{141AD13B-561D-484F-ABE4-50D583216CB0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PetHotel.Application", "PetHotel.Application\PetHotel.Application.csproj", "{EB0351E7-5755-484D-A103-5ABDC76F77A7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PetHotel.Infrastructure", "PetHotel.Infrastructure\PetHotel.Infrastructure.csproj", "{78611746-CBE5-4311-A015-AB33446E6CBC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PetHotel.API", "PetHotel.API\PetHotel.API.csproj", "{73E61CAA-1373-43B7-A31B-9F218648C1F0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PetHotel.Tests", "PetHotel.Tests\PetHotel.Tests.csproj", "{D565F016-AEE5-443F-A8FD-CB2CEB75D811}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{141AD13B-561D-484F-ABE4-50D583216CB0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{141AD13B-561D-484F-ABE4-50D583216CB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{141AD13B-561D-484F-ABE4-50D583216CB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{141AD13B-561D-484F-ABE4-50D583216CB0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB0351E7-5755-484D-A103-5ABDC76F77A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB0351E7-5755-484D-A103-5ABDC76F77A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB0351E7-5755-484D-A103-5ABDC76F77A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB0351E7-5755-484D-A103-5ABDC76F77A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78611746-CBE5-4311-A015-AB33446E6CBC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78611746-CBE5-4311-A015-AB33446E6CBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78611746-CBE5-4311-A015-AB33446E6CBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78611746-CBE5-4311-A015-AB33446E6CBC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{73E61CAA-1373-43B7-A31B-9F218648C1F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73E61CAA-1373-43B7-A31B-9F218648C1F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73E61CAA-1373-43B7-A31B-9F218648C1F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73E61CAA-1373-43B7-A31B-9F218648C1F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D565F016-AEE5-443F-A8FD-CB2CEB75D811}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D565F016-AEE5-443F-A8FD-CB2CEB75D811}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D565F016-AEE5-443F-A8FD-CB2CEB75D811}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D565F016-AEE5-443F-A8FD-CB2CEB75D811}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

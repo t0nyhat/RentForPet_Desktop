@@ -1,0 +1,92 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+# Сохраняем корневую директорию проекта
+PROJECT_ROOT="$(cd "$(dirname -- "$0")/.." && pwd)"
+
+echo "🚀 Запуск pre-commit проверок..."
+echo ""
+
+# ============================================
+# FRONTEND ПРОВЕРКИ
+# ============================================
+cd "$PROJECT_ROOT/frontend" || exit 1
+
+# 1. Lint-staged (ESLint + Prettier для измененных файлов)
+echo "📝 [Frontend] Проверка ESLint и Prettier (lint-staged)..."
+npx lint-staged || {
+  echo "❌ ESLint или Prettier проверка не пройдена!"
+  exit 1
+}
+echo "✅ [Frontend] ESLint и Prettier прошли проверку"
+echo ""
+
+# 2. TypeScript type checking
+echo "🔍 [Frontend] Проверка типов TypeScript..."
+npm run type-check || {
+  echo "❌ TypeScript проверка типов не пройдена!"
+  exit 1
+}
+echo "✅ [Frontend] TypeScript типы корректны"
+echo ""
+
+# 3. Frontend tests
+echo "🧪 [Frontend] Запуск тестов..."
+npm test -- --run || {
+  echo "❌ Frontend тесты не пройдены!"
+  exit 1
+}
+echo "✅ [Frontend] Все тесты пройдены"
+echo ""
+
+# ============================================
+# BACKEND ПРОВЕРКИ (C#)
+# ============================================
+cd "$PROJECT_ROOT" || exit 1
+
+# Проверяем, есть ли измененные C# файлы
+CS_FILES=$(git diff --cached --name-only --diff-filter=ACM | grep '\.cs$' || true)
+
+if [ -n "$CS_FILES" ]; then
+  echo "🔍 [Backend] Обнаружены измененные C# файлы, запуск проверок..."
+  
+  # 4. StyleCop + Build
+  echo "📝 [Backend] Проверка StyleCop и сборка проекта..."
+  BUILD_OUTPUT=$(dotnet build --no-incremental 2>&1)
+  BUILD_EXIT=$?
+  
+  # Подсчитываем предупреждения StyleCop
+  STYLECOP_WARNINGS=$(echo "$BUILD_OUTPUT" | grep -c "warning SA" || true)
+  
+  if [ $BUILD_EXIT -ne 0 ]; then
+    echo "❌ C# сборка не пройдена!"
+    echo "$BUILD_OUTPUT"
+    exit 1
+  fi
+  
+  if [ $STYLECOP_WARNINGS -gt 0 ]; then
+    echo "⚠️  Найдено $STYLECOP_WARNINGS предупреждений StyleCop:"
+    echo "$BUILD_OUTPUT" | grep "warning SA" | head -20
+    echo ""
+    echo "💡 Исправьте предупреждения StyleCop или используйте 'git commit --no-verify' для пропуска проверки"
+    exit 1
+  fi
+  
+  echo "✅ [Backend] StyleCop и сборка прошли успешно (0 предупреждений)"
+  echo ""
+  
+  # 5. Backend tests
+  echo "🧪 [Backend] Запуск тестов..."
+  dotnet test PetHotel.Tests --no-build --verbosity quiet || {
+    echo "❌ Backend тесты не пройдены!"
+    exit 1
+  }
+  echo "✅ [Backend] Все тесты пройдены"
+  echo ""
+else
+  echo "ℹ️  [Backend] Нет измененных C# файлов, пропускаем проверки"
+  echo ""
+fi
+
+echo "🎉 ✅ Все проверки успешно пройдены!"
+

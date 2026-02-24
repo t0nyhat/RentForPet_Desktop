@@ -1,0 +1,69 @@
+{
+  "species": {
+    "dog": "Dog",
+    "cat": "Cat",
+    "rodent": "Rodent",
+    "bird": "Bird",
+    "reptile": "Reptile",
+    "other": "Other"
+  },
+  "gender": {
+    "male": "Male",
+    "female": "Female"
+  },
+  "dogGender": {
+    "male": "Male",
+    "female": "Female"
+  },
+  "fields": {
+    "name": "Name",
+    "species": "Species",
+    "breed": "Breed",
+    "gender": "Gender",
+    "birthDate": "Birth Date",
+    "age": "Age",
+    "weight": "Weight",
+    "color": "Color",
+    "microchip": "Microchip",
+    "specialNeeds": "Special Needs",
+    "notes": "Notes",
+    "vaccinations": "Vaccinations",
+    "medicalHistory": "Medical History"
+  },
+  "form": {
+    "title": "Pet",
+    "newPet": "New Pet",
+    "editPet": "Edit Pet",
+    "deletePet": "Delete Pet",
+    "selectSpecies": "Select Species",
+    "selectGender": "Select Gender",
+    "enterName": "Enter name",
+    "enterBreed": "Enter breed",
+    "selectBirthDate": "Select birth date",
+    "enterWeight": "Enter weight (kg)",
+    "enterSpecialNeeds": "Enter special needs"
+  },
+  "validation": {
+    "nameRequired": "Pet name is required",
+    "speciesRequired": "Please select species",
+    "genderRequired": "Please select gender"
+  },
+  "messages": {
+    "noPets": "No pets",
+    "confirmDelete": "Are you sure you want to delete this pet?",
+    "petCreated": "Pet added",
+    "petUpdated": "Pet updated",
+    "petDeleted": "Pet deleted"
+  },
+  "age": {
+    "years_one": "{{count}} year",
+    "years_other": "{{count}} years",
+    "months": "{{count}} mo",
+    "lessThanMonth": "< 1 month"
+  },
+  "icons": {
+    "dog": "🐕",
+    "cat": "🐱",
+    "other": "🐾"
+  }
+}

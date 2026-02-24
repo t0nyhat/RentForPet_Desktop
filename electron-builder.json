@@ -1,0 +1,42 @@
+{
+  "appId": "com.rentforpet.desktop",
+  "productName": "RentForPet",
+  "directories": {
+    "output": "dist-electron"
+  },
+  "icon": "build/icons/icon.png",
+  "files": ["main.js", "preload.js", "frontend/dist/**/*"],
+  "extraResources": [
+    {
+      "from": "PetHotel.API/out/",
+      "to": "dotnet/",
+      "filter": ["**/*"]
+    }
+  ],
+  "publish": [
+    {
+      "provider": "github",
+      "owner": "t0nyhat",
+      "repo": "PetForRentDesktop",
+      "releaseType": "release"
+    }
+  ],
+  "mac": {
+    "icon": "build/icons/icon.icns",
+    "category": "public.app-category.business",
+    "target": ["dmg", "zip"],
+    "artifactName": "${productName}-${version}-${arch}.${ext}"
+  },
+  "win": {
+    "icon": "build/icons/icon.ico",
+    "target": ["nsis", "zip"],
+    "artifactName": "${productName}-${version}-${arch}.${ext}"
+  },
+  "linux": {
+    "icon": "build/icons",
+    "target": ["AppImage", "deb"],
+    "artifactName": "${productName}-${version}-${arch}.${ext}",
+    "category": "Office",
+    "maintainer": "PetForRent Team <support@rentforpet.ru>"
+  }
+}
