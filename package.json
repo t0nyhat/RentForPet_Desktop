@@ -1,6 +1,6 @@
 {
   "name": "pet-hotel-desktop",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Desktop application for pet hotel management - booking, clients, payments and more",
   "main": "main.js",
   "repository": {
