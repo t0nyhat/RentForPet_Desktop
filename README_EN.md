@@ -25,7 +25,9 @@ Language: [RU](README.md) | [EN](README_EN.md)
 
 ## Overview
 
-Pet Hotel Desktop is a fully local app for pet hotel management. It works offline, stores all data on your computer, and does not require authentication. The dashboard opens immediately.
+Pet Hotel Desktop is the **local desktop version of the RentForPet SaaS platform**. It works offline, stores all data on your computer, and does not require authentication. The dashboard opens immediately.
+
+> 🌐 **Cloud SaaS version** with extended features will soon be available at [rentforpet.ru](https://rentforpet.ru)
 
 ### Highlights
 
@@ -33,6 +35,20 @@ Pet Hotel Desktop is a fully local app for pet hotel management. It works offlin
 - **No auth** - launch and work
 - **Modern stack** - React + TypeScript + .NET 8
 - **Cross-platform** - macOS, Windows, Linux
+
+---
+
+## Download
+
+Ready-to-use builds for all platforms are available on the [GitHub Releases](https://github.com/t0nyhat/RentForPet_Desktop/releases) page.
+
+| Platform | Link |
+|----------|------|
+| 🍎 macOS (Apple Silicon) | [RentForPet-1.0.5-arm64.dmg](https://github.com/t0nyhat/RentForPet_Desktop/releases/download/v1.0.5/RentForPet-1.0.5-arm64.dmg) |
+| 🍎 macOS (Apple Silicon, ZIP) | [RentForPet-1.0.5-arm64.zip](https://github.com/t0nyhat/RentForPet_Desktop/releases/download/v1.0.5/RentForPet-1.0.5-arm64.zip) |
+| 🍎 macOS (Intel) | [RentForPet-1.0.5-x64.zip](https://github.com/t0nyhat/RentForPet_Desktop/releases/download/v1.0.5/RentForPet-1.0.5-x64.zip) |
+| 🐧 Linux (AppImage) | [RentForPet-1.0.5-x86_64.AppImage](https://github.com/t0nyhat/RentForPet_Desktop/releases/download/v1.0.5/RentForPet-1.0.5-x86_64.AppImage) |
+| 🐧 Linux (Debian/Ubuntu) | [RentForPet-1.0.5-amd64.deb](https://github.com/t0nyhat/RentForPet_Desktop/releases/download/v1.0.5/RentForPet-1.0.5-amd64.deb) |
 
 ---
 
@@ -242,3 +258,33 @@ dotnet watch run --project PetHotel.API        # Hot reload
 dotnet build PetHotel.sln                      # Build
 dotnet test PetHotel.Tests                     # Run tests
 ```
+
+---
+
+## License
+
+MIT License — see [LICENSE](LICENSE)
+
+---
+
+## Built with AI
+
+This product was developed exclusively using artificial intelligence tools:
+
+![AI Tools](https://img.shields.io/badge/Built%20with-AI-blueviolet?style=for-the-badge)
+
+- **GitHub Copilot** — AI assistant directly in the editor
+- **Claude (Anthropic)** — code generation and analysis
+- **OpenAI Codex** — code completion and writing
+- **Cursor** — AI code editor
+- **Sourcecraft** — AI-powered development tools
+
+---
+
+<div align="center">
+
+**RentForPet** 🐾
+
+</div>
+
+<!-- Updated: 2026-02-26 -->
