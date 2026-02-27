@@ -47,6 +47,7 @@ Pet Hotel Desktop — это **локальная десктоп-версия Sa
 | 🍎 macOS (Apple Silicon) | [RentForPet-1.0.5-arm64.dmg](https://github.com/t0nyhat/RentForPet_Desktop/releases/download/v1.0.5/RentForPet-1.0.5-arm64.dmg) |
 | 🍎 macOS (Apple Silicon, ZIP) | [RentForPet-1.0.5-arm64.zip](https://github.com/t0nyhat/RentForPet_Desktop/releases/download/v1.0.5/RentForPet-1.0.5-arm64.zip) |
 | 🍎 macOS (Intel) | [RentForPet-1.0.5-x64.zip](https://github.com/t0nyhat/RentForPet_Desktop/releases/download/v1.0.5/RentForPet-1.0.5-x64.zip) |
+| 🪟 Windows | [RentForPet-1.0.5-x64.exe](https://github.com/t0nyhat/RentForPet_Desktop/releases/download/v1.0.5/RentForPet-1.0.5-x64.exe) |
 | 🐧 Linux (AppImage) | [RentForPet-1.0.5-x86_64.AppImage](https://github.com/t0nyhat/RentForPet_Desktop/releases/download/v1.0.5/RentForPet-1.0.5-x86_64.AppImage) |
 | 🐧 Linux (Debian/Ubuntu) | [RentForPet-1.0.5-amd64.deb](https://github.com/t0nyhat/RentForPet_Desktop/releases/download/v1.0.5/RentForPet-1.0.5-amd64.deb) |
 
